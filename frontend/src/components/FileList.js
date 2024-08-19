@@ -18,7 +18,12 @@ const FileList = ({ onUploadComplete }) => {
 
   const fetchFiles = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/files');
+      const token = localStorage.getItem('token');
+      const response = await axios.get('http://localhost:3000/files', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       setFiles(response.data);
     } catch (error) {
       console.error('Error fetching files:', error);

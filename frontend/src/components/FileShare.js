@@ -6,7 +6,12 @@ const FileShare = ({ fileKey }) => {
 
   const generateShareLink = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/share/${fileKey}`);
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`http://localhost:3000/share/${fileKey}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       setShareLink(response.data.downloadUrl);
     } catch (error) {
       console.error('Error generating share link:', error);

@@ -21,9 +21,11 @@ const FileUpload = ({ onUploadComplete }) => {
     formData.append('file', file);
 
     try {
+      const token = localStorage.getItem('token');
       const response = await axios.post('http://localhost:3000/upload', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${token}`
         },
         onUploadProgress: (progressEvent) => {
           const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
@@ -35,7 +37,6 @@ const FileUpload = ({ onUploadComplete }) => {
       setUploadProgress(0);
       setFile(null);
       
-      // Notify parent component that upload is complete
       if (onUploadComplete) {
         onUploadComplete();
       }
