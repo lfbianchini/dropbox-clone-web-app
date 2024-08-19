@@ -1,1 +1,1 @@
-node.js, express, react, aws sdk, multer, cors
+node.js, express, react, aws sdk, postgresql, jwt, multer, cors
